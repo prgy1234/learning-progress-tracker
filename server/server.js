@@ -30,7 +30,10 @@ if (!isProduction) {
 }
 
 app.use(session({
-  store: new SQLiteStore({ db: "sessions.sqlite", dir: path.resolve("./data") }),
+store: new SQLiteStore({
+  db: "sessions.sqlite",
+  dir: path.dirname(path.resolve(process.env.DATABASE_FILE || "./data/learning-tracker.sqlite")),
+}),
   name: "lpt.sid",
   secret: process.env.SESSION_SECRET || "local-development-only-change-this-secret-please",
   resave: false,
